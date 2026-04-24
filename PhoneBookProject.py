@@ -1,36 +1,80 @@
-path = "Web devlopment"
-if path == "Web devlopment" :
-    print("Javascript")
+# Phone Book Application
 
-elif path == "IOS" :
-    print("Swift")
-
-elif path == "Anderoid" :
-    print("Kotlin")
-
-i = 0
-while i <= 6 :
-    print(i)
-    i += 1
-
-student = ["shatha" , "sana" , "alaa" , "abdullah"]
-for s in student :
-    print(s)
-
-for num in range(10):
-    print(num)
+phone_book = {
+    "1111111111": "Amal",
+    "2222222222": "Mohammed",
+    "3333333333": "Khadijah",
+    "4444444444": "Abdullah",
+    "5555555555": "Rawan",
+    "6666666666": "Faisal",
+    "7777777777": "Layla"
+}
 
 
-def greet():
-    name = input("please enter your name:")
-    time = input("please inter the time of the day :")
-    print("Good " + time + "," + name + "!")
-greet()
+def is_valid_number(number):
+    """Check if the phone number is valid (10 digits only)."""
+    return number.isdigit() and len(number) == 10
 
-def add(first_number , secound_number):
-    result = first_number * secound_number
-    return result
 
-value = add(2,7)
-print(value)
+def find_name_by_number():
+    phone_number = input("Enter the phone number: ")
 
+    if not is_valid_number(phone_number):
+        print("Invalid phone number.")
+        return
+
+    if phone_number in phone_book:
+        print(f"Name: {phone_book[phone_number]}")
+    else:
+        print("Number not found.")
+
+
+def find_number_by_name():
+    name = input("Enter the name: ")
+
+    for number, owner in phone_book.items():
+        if owner.lower() == name.lower():
+            print(f"Phone Number: {number}")
+            return
+
+    print("Name not found.")
+
+
+def add_new_contact():
+    name = input("Enter new name: ")
+    number = input("Enter new number: ")
+
+    if not is_valid_number(number):
+        print("Invalid phone number.")
+        return
+
+    phone_book[number] = name
+    print("Contact added successfully!")
+
+
+def main():
+    print("📱 Phone Book Application")
+
+    while True:
+        print("\n1. Find name by number")
+        print("2. Find number by name")
+        print("3. Add new contact")
+        print("4. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            find_name_by_number()
+        elif choice == "2":
+            find_number_by_name()
+        elif choice == "3":
+            add_new_contact()
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice, try again.")
+
+
+if __name__ == "__main__":
+    main()
